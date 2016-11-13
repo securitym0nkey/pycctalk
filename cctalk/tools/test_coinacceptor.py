@@ -2,8 +2,8 @@
 import os
 import sys
 import serial
+import argparse
 sys.path.append(os.getcwd())
-import serial
 import cctalk
 from cctalk.coinacceptor import Coin,CoinAcceptor
 
@@ -16,15 +16,17 @@ class TestAcceptor(CoinAcceptor):
   print("Product Code:\t\t{}".format(self.product_code))
 
 def main():
-
- port = '/dev/ttyUSB0'
+ argp = argparse.ArgumentParser(description='This tool connects to a ccTalk speaking coin acceptor over a serial Inteface.')
+ argp.add_argument('--port',help='The serial port. Default is /dev/ttyUSB0 ', default="/dev/ttyUSB0")
+ args = argp.parse_args()
 
  try:
-  interface = cctalk.SerialInterface(port)
+  interface = cctalk.SerialInterface(args.port)
   ca = TestAcceptor(interface)
   interface.start()
  except serial.SerialException:
-  print("Error while opening serial port {}".format(port))
+  print("Error while opening serial port {}".format(args.port))
+
 
 if __name__ == '__main__':
  main()
