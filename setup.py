@@ -7,7 +7,7 @@ setup(name='pycctalk',
       author='Julian Wecke',
       author_email='julian@net23.de',
       license='',
-      packages=['cctalk','cctalk.coinacceptor'],
+      packages=['cctalk','cctalk.tools'],
       install_requires=['pyserial'],
-      zip_safe=false)
+      zip_safe=False)
 
